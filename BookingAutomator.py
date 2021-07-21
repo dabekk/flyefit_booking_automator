@@ -58,7 +58,7 @@ class BookingAutomator:
         date_selection = self.driver.find_element_by_xpath("//li[contains(text(),'Tomorrow')]")
         date_selection.click()
 
-        time_button = self.driver.find_element_by_xpath("//p[@id='btn_1869050']")
+        time_button = self.driver.find_element_by_xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/section[1]/div[4]/div[1]/div[9]/a[1]/div[3]/p[2]")
         time_button.click()
 
         time.sleep(3)   # allow popup to load
@@ -66,14 +66,19 @@ class BookingAutomator:
         book_button.click()
 
         # logout does not yet work. Workaround to exit browser
-        logout_button = self.driver.find_element_by_xpath("//header/div[1]/div[1]/div[1]/ul[1]/li[6]/a[1]")
+        close_button = self.driver.find_element_by_xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[1]/div[1]/button[1]")
+        close_button.click()
+        logout_button = self.driver.find_element_by_xpath("//*[@id='logout_copy_3']")
         logout_button.click()
+
+        time.sleep(5)  # allow popup to load
+        self.driver.quit()
 
     def book_workout(self):
         self._login_to_site()
         self._book_workout()
 
 
-path = "C:/Users/Kamil/PycharmProjects/pythonProject/chromedriver.exe"  # must give path to webdriver file
+path = "C:/Users/Administrator/PycharmProjects/flyefit_booking_automator/chromedriver.exe"  # must give path to webdriver file
 booking_automator = BookingAutomator(path)
 booking_automator.book_workout()
