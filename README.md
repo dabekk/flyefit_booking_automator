@@ -1,7 +1,26 @@
-# flyefit_booking_automator
+# FlyeFit Booking Automator
 
-Python class to automatically book a gym slot in Flyefit gyms.
+A Python automation that books gym slots automatically, deployed to AWS and run on a daily schedule via cron.
 
-This tool was used during 2020/2021 when Flyefit gyms in Ireland had restricted access and required members to pre-book their time slots. To ensure consistent bookings, users can use this tool to automate booking in advance so that a slot is always booked for a specified time.
+## What it does
 
-This script would be deployed to an AWS EC2 server (T2.micro - free tier) and executed daily (Monday-Friday) and a desired time via cron jobs.
+- Authenticates against the FlyeFit booking system
+- Books a slot for a specified day and time
+- Runs unattended on a schedule (Monday-Friday) via cron
+- Designed to fail quietly and log outcomes, so a missed run is visible
+
+## Architecture
+
+- **Language:** Python (single `BookingAutomator` class)
+- **Deployment:** AWS EC2 (t2.micro, free tier)
+- **Scheduling:** cron jobs triggering the script daily at a set time
+- **Model:** trigger-based, unattended automation, no human in the loop once configured
+
+## Usage
+
+1. Set your FlyeFit credentials and desired booking slot in the configuration.
+2. Run manually:
+```bash
+   python BookingAutomator.py
+```
+3. For scheduled use, add a cron entry on the host, e.g. book every weekday at 07:00:
