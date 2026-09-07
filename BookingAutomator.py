@@ -73,6 +73,7 @@ class BookingAutomator:
 
         time.sleep(5)  # allow popup to load
         self.driver.quit()
+        
 
     def book_workout(self):
         self._login_to_site()
